@@ -91,7 +91,7 @@ namespace OptionEdge.API.AliceBlue
             if (MessageType == "Text")
             {
                 string message = Encoding.UTF8.GetString(Data.Take(Count).ToArray());
-                if (_debug) Utils.LogMessage("WebSocket Message: " + message);
+                //if (_debug) Utils.LogMessage("WebSocket Message: " + message);
 
                 var data = JsonSerializer.Deserialize<dynamic>(Data);
                 if (data["t"] == "ck")
@@ -101,7 +101,19 @@ namespace OptionEdge.API.AliceBlue
                 }
                 else if (data["t"] == "tk" || data["t"] == "tf" || data["t"] == "dk" || data["t"] == "df")
                 {
-                    OnTick(new Tick(data));
+                    //if (data == null || data.FeedTime == null || data.LastTradedPrice == 0)
+                    //{
+                    //    return;
+                    //}
+                    if ((data["t"] == "tf" || data["t"] == "df") && Utils.IsPropertyExist(data, "ft") && Utils.IsPropertyExist(data, "lp"))
+                    {
+                        ThreadPool.QueueUserWorkItem(
+                        new WaitCallback(delegate (object state)
+                        {
+                            OnTick((Tick)state);
+                        }), new Tick(data));
+                        //OnTick(new Tick(data));
+                    }
                 } else
                 {
                     if (_debug)
@@ -123,7 +135,7 @@ namespace OptionEdge.API.AliceBlue
                 if (_isReconnect)
                     Reconnect();
             }
-            if (_debug) Utils.LogMessage(_timerTick.ToString());
+            //if (_debug) Utils.LogMessage(_timerTick.ToString());
         }
 
         private void _onConnect()
@@ -167,7 +179,11 @@ namespace OptionEdge.API.AliceBlue
         private void Reconnect()
         {
             if (IsConnected)
+            {
+                _timerTick = (int)Math.Min(Math.Pow(2, _retryCount) * _interval, 60);
+                _timer.Start();
                 return;
+            }
 
             if (_retryCount > _retries)
             {

@@ -94,8 +94,14 @@ namespace OptionEdge.API.AliceBlue
 
                         try
                         {
+                            //ThreadPool.QueueUserWorkItem(
+                            //    new WaitCallback(delegate (object state)
+                            //    {
+                            //        OnData?.Invoke(((Data)state).buffer, ((Data)state).offset, ((Data)state).messagetype);
+                            //    }), new Data(buffer, offset, t.Result.MessageType.ToString()));
                             OnData?.Invoke(buffer, offset, t.Result.MessageType.ToString());
-                        }catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             OnError?.Invoke($"Error in socket data processing handler.{e.ToString()}");
                         }
@@ -150,6 +156,19 @@ namespace OptionEdge.API.AliceBlue
                     OnError?.Invoke("Error while closing connection. Message: " + e.Message);
                 }
             }
+        }
+    }
+
+    public struct Data
+    {
+        public byte[] buffer;
+        public int offset;
+        public string messagetype;
+        public Data(byte[] buffer, int offset, string messagetype)
+        {
+            this.buffer = buffer;
+            this.offset = offset;
+            this.messagetype = messagetype;
         }
     }
 }
