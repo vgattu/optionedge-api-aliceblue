@@ -44,9 +44,9 @@ namespace OptionEdge.API.AliceBlue.Samples
         public static bool allPositionsClosed;
         public static DateTime expiryDate = new DateTime(2022, 9, 22);
 
-        public static bool LowerRisk200Straddle = false;
+        public static bool LowerRisk200Straddle = true;
 
-        public static bool MultiStraddle = true;
+        public static bool MultiStraddle = false;
 
         public static bool createOrder = true;
         public static bool createRealOrder = true;
@@ -64,6 +64,7 @@ namespace OptionEdge.API.AliceBlue.Samples
         public static TimeSpan addLots = DateTime.Now.TimeOfDay;
         public static Dictionary<int, string> instrumentDict;
         public static ConcurrentQueue<ConsoleKey> consoleKeyQueue = new();
+        public static TimeSpan lastTickerFeed = DateTime.Now.TimeOfDay;
 
         // apiKey, userId, logging setting
         static Settings _settings = new Settings();
@@ -296,7 +297,8 @@ namespace OptionEdge.API.AliceBlue.Samples
                             $"PnL: {(multiStraddleTrailPnl + pePnL + cePnL) / 100m,-10} " +
                             $"Net: {(multiStraddleTrailPnl + pePnL + cePnL) * aliceBlueNumberOfLots1 / 100m,-10} " +
                             $"MaxPnL: {maxPnL / 100m,-10} " +
-                            $"Straddle: {(cePrice + pePrice) / 100m}");
+                            $"Straddle: {(cePrice + pePrice) / 100m,-10} " +
+                            $"Update: {(lastUpdated - lastTickerFeed).TotalSeconds}");
                     }
                     if (currentStrikeData?.ExchangeTimeStamp != null && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                     {
@@ -333,7 +335,8 @@ namespace OptionEdge.API.AliceBlue.Samples
                             }
 
                             msg.Append($"CE: {currentSubscriptions.Subscriptions[callToken].StrikePrice} - {currentSubscriptions.Subscriptions[callToken].SellPrice / 100m,-10}");
-                            msg.Append($"PE: {currentSubscriptions.Subscriptions[putToken].StrikePrice} - {currentSubscriptions.Subscriptions[putToken].SellPrice / 100m,-10}");
+                            msg.Append($"PE: {currentSubscriptions.Subscriptions[putToken].StrikePrice} - {currentSubscriptions.Subscriptions[putToken].SellPrice / 100m,-10} " +
+                            $"Update: {(lastUpdated - lastTickerFeed).TotalSeconds}");
 
                             //if (string.IsNullOrEmpty(putSellOrderOpenId))
                             //{
@@ -534,34 +537,37 @@ namespace OptionEdge.API.AliceBlue.Samples
                 lock (optionData)
                 {
                     //var ltp = Helper.BinaryToInt32(msg.Binary, 6);
-                    var buyPrice = Convert.ToInt32(TickData.BuyPrice1 * 100);
-                    var sellPrice = Convert.ToInt32(TickData.SellPrice1 * 100);
-                    if (buyPrice != 0 && sellPrice != 0)
                     {
-                        var exchangeTimeStamp = TickData.FeedTime;
-                        //optionData.Ltp = ltp;
-                        optionData.ExchangeTimeStamp = (DateTime)exchangeTimeStamp;
-                        optionData.BuyPrice = buyPrice;
-                        optionData.SellPrice = sellPrice;
+                        var buyPrice = Convert.ToInt32(TickData.BuyPrice1 * 100);
+                        var sellPrice = Convert.ToInt32(TickData.SellPrice1 * 100);
+                        if (buyPrice != 0 || sellPrice != 0)
+                        {
+                            var exchangeTimeStamp = TickData.FeedTime;
+                            //optionData.Ltp = ltp;
+                            optionData.ExchangeTimeStamp = (DateTime)exchangeTimeStamp;
+                            lastTickerFeed = optionData.ExchangeTimeStamp.TimeOfDay;
+                            if (buyPrice != 0) optionData.BuyPrice = buyPrice;
+                            if (sellPrice != 0) optionData.SellPrice = sellPrice;
 
-                        //if (syncDataToDb)
-                        //{
-                        //    try
-                        //    {
-                        //        securityTicksQueue.Enqueue(new SecurityTick()
-                        //        {
-                        //            SecurityId = instrumentTokenSecurityIdMapping[instrumentToken],
-                        //            Low = sellPrice / 100m,
-                        //            High = buyPrice / 100m,
-                        //            Source = DataSource.AliceBlue,
-                        //            Timestamp = DateTime.Now
-                        //        });
-                        //    }
-                        //    catch (Exception ex)
-                        //    {
-                        //        WriteMsgToConsole("Failed to enqueue Option ticker: " + ex.Message);
-                        //    }
-                        //}
+                            //if (syncDataToDb)
+                            //{
+                            //    try
+                            //    {
+                            //        securityTicksQueue.Enqueue(new SecurityTick()
+                            //        {
+                            //            SecurityId = instrumentTokenSecurityIdMapping[instrumentToken],
+                            //            Low = sellPrice / 100m,
+                            //            High = buyPrice / 100m,
+                            //            Source = DataSource.AliceBlue,
+                            //            Timestamp = DateTime.Now
+                            //        });
+                            //    }
+                            //    catch (Exception ex)
+                            //    {
+                            //        WriteMsgToConsole("Failed to enqueue Option ticker: " + ex.Message);
+                            //    }
+                            //}
+                        }
                     }
                     //WriteMsgToConsole($"{instrumentToken} - {optionData.Ltp / 100m} {optionData.BuyPrice / 100m} {optionData.SellPrice / 100m}");
                 }
