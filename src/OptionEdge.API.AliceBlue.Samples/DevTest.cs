@@ -36,17 +36,17 @@ namespace OptionEdge.API.AliceBlue.Samples
         public static string callBuyOrderCloseId;
         private static string orderTag = "test";
         private static int bankNiftyLotSize = 25;
-        private static int aliceBlueNumberOfLots1 = 10;
+        private static int aliceBlueNumberOfLots1 = 12;
         public static int ceSellPrice, ceBuyPrice, ceBuyClosePrice, peSellPrice, peBuyPrice, peBuyClosePrice;
         public static bool ceSellTriggered, ceBuyTriggered, peSellTriggered, peBuyTriggered, ceBuyClosed, peBuyClosed;
         public static int cePnL, pePnL, maxPnL;
         public static bool maxPnLCrossedThreshold;
         public static bool allPositionsClosed;
-        public static DateTime expiryDate = new DateTime(2022, 9, 22);
+        public static DateTime expiryDate = new DateTime(2022, 10, 6);
 
-        public static bool LowerRisk200Straddle = true;
+        public static bool LowerRisk200Straddle = false;
 
-        public static bool MultiStraddle = false;
+        public static bool MultiStraddle = true;
 
         public static bool createOrder = true;
         public static bool createRealOrder = true;
@@ -79,106 +79,104 @@ namespace OptionEdge.API.AliceBlue.Samples
         {
             try
             {
-                //strikeInstrumentTokenDict.Add(29500, new Tuple<int, int>(38724, 38726));
-                //strikeInstrumentTokenDict.Add(30000, new Tuple<int, int>(38727, 38728));
-                //strikeInstrumentTokenDict.Add(30500, new Tuple<int, int>(41027, 41028));
-                //strikeInstrumentTokenDict.Add(31000, new Tuple<int, int>(41029, 41030));
-                //strikeInstrumentTokenDict.Add(31500, new Tuple<int, int>(41777, 41778));
-                //strikeInstrumentTokenDict.Add(32000, new Tuple<int, int>(41779, 41787));
-                //strikeInstrumentTokenDict.Add(32500, new Tuple<int, int>(41788, 41789));
-                //strikeInstrumentTokenDict.Add(33000, new Tuple<int, int>(41790, 41797));
-                //strikeInstrumentTokenDict.Add(33500, new Tuple<int, int>(41798, 41802));
-                //strikeInstrumentTokenDict.Add(34000, new Tuple<int, int>(41804, 41805));
-                //strikeInstrumentTokenDict.Add(34500, new Tuple<int, int>(42411, 42412));
-                //strikeInstrumentTokenDict.Add(35000, new Tuple<int, int>(42413, 42414));
-                //strikeInstrumentTokenDict.Add(35500, new Tuple<int, int>(42415, 42416));
-                //strikeInstrumentTokenDict.Add(35700, new Tuple<int, int>(42417, 42424));
-                //strikeInstrumentTokenDict.Add(35800, new Tuple<int, int>(42427, 42439));
-                //strikeInstrumentTokenDict.Add(35900, new Tuple<int, int>(42440, 42448));
-                //strikeInstrumentTokenDict.Add(36000, new Tuple<int, int>(42835, 42840));
-                //strikeInstrumentTokenDict.Add(36100, new Tuple<int, int>(46852, 46853));
-                //strikeInstrumentTokenDict.Add(36200, new Tuple<int, int>(46856, 46857));
-                //strikeInstrumentTokenDict.Add(36300, new Tuple<int, int>(48103, 48104));
-                //strikeInstrumentTokenDict.Add(36400, new Tuple<int, int>(54267, 54268));
-                //strikeInstrumentTokenDict.Add(36500, new Tuple<int, int>(54269, 54270));
-                //strikeInstrumentTokenDict.Add(36600, new Tuple<int, int>(54271, 54272));
-                //strikeInstrumentTokenDict.Add(36700, new Tuple<int, int>(58880, 58881));
-                //strikeInstrumentTokenDict.Add(36800, new Tuple<int, int>(58882, 58883));
-                //strikeInstrumentTokenDict.Add(36900, new Tuple<int, int>(58884, 58885));
-                //strikeInstrumentTokenDict.Add(37000, new Tuple<int, int>(58886, 58887));
-                //strikeInstrumentTokenDict.Add(37100, new Tuple<int, int>(58888, 58889));
-                //strikeInstrumentTokenDict.Add(37200, new Tuple<int, int>(58890, 58891));
-                //strikeInstrumentTokenDict.Add(37300, new Tuple<int, int>(58892, 58893));
-                //strikeInstrumentTokenDict.Add(37400, new Tuple<int, int>(58894, 58895));
-                //strikeInstrumentTokenDict.Add(37500, new Tuple<int, int>(58898, 58899));
-                //strikeInstrumentTokenDict.Add(37600, new Tuple<int, int>(58900, 58901));
-                //strikeInstrumentTokenDict.Add(37700, new Tuple<int, int>(58902, 58903));
-                //strikeInstrumentTokenDict.Add(37800, new Tuple<int, int>(58904, 58905));
-                //strikeInstrumentTokenDict.Add(37900, new Tuple<int, int>(58906, 58907));
-                strikeInstrumentTokenDict.Add(38000, new Tuple<int, int>(58908, 58909));
-                strikeInstrumentTokenDict.Add(38100, new Tuple<int, int>(58910, 58911));
-                strikeInstrumentTokenDict.Add(38200, new Tuple<int, int>(58912, 58913));
-                strikeInstrumentTokenDict.Add(38300, new Tuple<int, int>(58914, 58915));
-                strikeInstrumentTokenDict.Add(38400, new Tuple<int, int>(58916, 58917));
-                strikeInstrumentTokenDict.Add(38500, new Tuple<int, int>(58918, 58919));
-                strikeInstrumentTokenDict.Add(38600, new Tuple<int, int>(58920, 58921));
-                strikeInstrumentTokenDict.Add(38700, new Tuple<int, int>(58922, 58923));
-                strikeInstrumentTokenDict.Add(38800, new Tuple<int, int>(58924, 58925));
-                strikeInstrumentTokenDict.Add(38900, new Tuple<int, int>(58926, 58927));
-                strikeInstrumentTokenDict.Add(39000, new Tuple<int, int>(58928, 58929));
-                strikeInstrumentTokenDict.Add(39100, new Tuple<int, int>(58930, 58931));
-                strikeInstrumentTokenDict.Add(39200, new Tuple<int, int>(58932, 58933));
-                strikeInstrumentTokenDict.Add(39300, new Tuple<int, int>(58934, 58935));
-                strikeInstrumentTokenDict.Add(39400, new Tuple<int, int>(58936, 58937));
-                strikeInstrumentTokenDict.Add(39500, new Tuple<int, int>(58938, 58939));
-                strikeInstrumentTokenDict.Add(39600, new Tuple<int, int>(58940, 58941));
-                strikeInstrumentTokenDict.Add(39700, new Tuple<int, int>(58942, 58943));
-                strikeInstrumentTokenDict.Add(39800, new Tuple<int, int>(58944, 58945));
-                strikeInstrumentTokenDict.Add(39900, new Tuple<int, int>(58946, 58947));
-                strikeInstrumentTokenDict.Add(40000, new Tuple<int, int>(58948, 58949));
-                strikeInstrumentTokenDict.Add(40100, new Tuple<int, int>(58950, 58951));
-                strikeInstrumentTokenDict.Add(40200, new Tuple<int, int>(58952, 58953));
-                strikeInstrumentTokenDict.Add(40300, new Tuple<int, int>(58954, 59037));
-                strikeInstrumentTokenDict.Add(40400, new Tuple<int, int>(59038, 59039));
-                strikeInstrumentTokenDict.Add(40500, new Tuple<int, int>(59040, 59041));
-                strikeInstrumentTokenDict.Add(40600, new Tuple<int, int>(59042, 59043));
-                strikeInstrumentTokenDict.Add(40700, new Tuple<int, int>(59044, 59045));
-                strikeInstrumentTokenDict.Add(40800, new Tuple<int, int>(59046, 59047));
-                strikeInstrumentTokenDict.Add(40900, new Tuple<int, int>(59048, 59049));
-                strikeInstrumentTokenDict.Add(41000, new Tuple<int, int>(59050, 59051));
-                strikeInstrumentTokenDict.Add(41100, new Tuple<int, int>(59052, 59053));
-                strikeInstrumentTokenDict.Add(41200, new Tuple<int, int>(59054, 59055));
-                strikeInstrumentTokenDict.Add(41300, new Tuple<int, int>(59056, 59057));
-                strikeInstrumentTokenDict.Add(41400, new Tuple<int, int>(59058, 59059));
-                strikeInstrumentTokenDict.Add(41500, new Tuple<int, int>(59060, 59061));
-                strikeInstrumentTokenDict.Add(41600, new Tuple<int, int>(59062, 59063));
-                strikeInstrumentTokenDict.Add(41700, new Tuple<int, int>(59064, 59065));
-                strikeInstrumentTokenDict.Add(41800, new Tuple<int, int>(59066, 59067));
-                strikeInstrumentTokenDict.Add(41900, new Tuple<int, int>(59068, 59069));
-                strikeInstrumentTokenDict.Add(42000, new Tuple<int, int>(59070, 59071));
-                strikeInstrumentTokenDict.Add(42100, new Tuple<int, int>(59072, 59073));
-                strikeInstrumentTokenDict.Add(42200, new Tuple<int, int>(59074, 59075));
-                strikeInstrumentTokenDict.Add(42300, new Tuple<int, int>(59076, 59077));
-                strikeInstrumentTokenDict.Add(42400, new Tuple<int, int>(59078, 59079));
-                strikeInstrumentTokenDict.Add(42500, new Tuple<int, int>(59080, 59081));
-                strikeInstrumentTokenDict.Add(42600, new Tuple<int, int>(59082, 59083));
-                strikeInstrumentTokenDict.Add(42700, new Tuple<int, int>(59084, 59085));
-                strikeInstrumentTokenDict.Add(42800, new Tuple<int, int>(59086, 59087));
-                strikeInstrumentTokenDict.Add(42900, new Tuple<int, int>(59088, 59089));
-                strikeInstrumentTokenDict.Add(43000, new Tuple<int, int>(59090, 59091));
-                //strikeInstrumentTokenDict.Add(43100, new Tuple<int, int>(59092, 59093));
-                //strikeInstrumentTokenDict.Add(43200, new Tuple<int, int>(59094, 59097));
-                //strikeInstrumentTokenDict.Add(43300, new Tuple<int, int>(59098, 59099));
-                //strikeInstrumentTokenDict.Add(43400, new Tuple<int, int>(59100, 59109));
-                //strikeInstrumentTokenDict.Add(43500, new Tuple<int, int>(59110, 59111));
-                //strikeInstrumentTokenDict.Add(43600, new Tuple<int, int>(59112, 59119));
-                //strikeInstrumentTokenDict.Add(43700, new Tuple<int, int>(59120, 59121));
-                //strikeInstrumentTokenDict.Add(44000, new Tuple<int, int>(59122, 59123));
-                //strikeInstrumentTokenDict.Add(44500, new Tuple<int, int>(59124, 59125));
-                //strikeInstrumentTokenDict.Add(45000, new Tuple<int, int>(59126, 59127));
-                //strikeInstrumentTokenDict.Add(45500, new Tuple<int, int>(59128, 59129));
-                //strikeInstrumentTokenDict.Add(46000, new Tuple<int, int>(59130, 59131));
-                //strikeInstrumentTokenDict.Add(46500, new Tuple<int, int>(59132, 59133));
+                //strikeInstrumentTokenDict.Add(29500, new Tuple<int, int>(35014, 35015));
+                //strikeInstrumentTokenDict.Add(30000, new Tuple<int, int>(35046, 35049));
+                //strikeInstrumentTokenDict.Add(32000, new Tuple<int, int>(35134, 35135));
+                //strikeInstrumentTokenDict.Add(32500, new Tuple<int, int>(35191, 35192));
+                //strikeInstrumentTokenDict.Add(33000, new Tuple<int, int>(35193, 35202));
+                //strikeInstrumentTokenDict.Add(33500, new Tuple<int, int>(35239, 35240));
+                //strikeInstrumentTokenDict.Add(34000, new Tuple<int, int>(35327, 35328));
+                //strikeInstrumentTokenDict.Add(34500, new Tuple<int, int>(35384, 35385));
+                //strikeInstrumentTokenDict.Add(35000, new Tuple<int, int>(36289, 36290));
+                //strikeInstrumentTokenDict.Add(35300, new Tuple<int, int>(36348, 36354));
+                //strikeInstrumentTokenDict.Add(35400, new Tuple<int, int>(36355, 36359));
+                //strikeInstrumentTokenDict.Add(35500, new Tuple<int, int>(36527, 36540));
+                //strikeInstrumentTokenDict.Add(35600, new Tuple<int, int>(36541, 36548));
+                //strikeInstrumentTokenDict.Add(35700, new Tuple<int, int>(36555, 36560));
+                //strikeInstrumentTokenDict.Add(35800, new Tuple<int, int>(36783, 36785));
+                //strikeInstrumentTokenDict.Add(35900, new Tuple<int, int>(37075, 37076));
+                strikeInstrumentTokenDict.Add(36000, new Tuple<int, int>(37078, 37079));
+                strikeInstrumentTokenDict.Add(36100, new Tuple<int, int>(37080, 37081));
+                strikeInstrumentTokenDict.Add(36200, new Tuple<int, int>(37084, 37085));
+                strikeInstrumentTokenDict.Add(36300, new Tuple<int, int>(37096, 37097));
+                strikeInstrumentTokenDict.Add(36400, new Tuple<int, int>(37098, 37099));
+                strikeInstrumentTokenDict.Add(36500, new Tuple<int, int>(37105, 37106));
+                strikeInstrumentTokenDict.Add(36600, new Tuple<int, int>(37107, 37108));
+                strikeInstrumentTokenDict.Add(36700, new Tuple<int, int>(37110, 37112));
+                strikeInstrumentTokenDict.Add(36800, new Tuple<int, int>(37113, 37114));
+                strikeInstrumentTokenDict.Add(36900, new Tuple<int, int>(37120, 37122));
+                strikeInstrumentTokenDict.Add(37000, new Tuple<int, int>(37123, 37133));
+                strikeInstrumentTokenDict.Add(37100, new Tuple<int, int>(37136, 37137));
+                strikeInstrumentTokenDict.Add(37200, new Tuple<int, int>(37138, 37139));
+                strikeInstrumentTokenDict.Add(37300, new Tuple<int, int>(37140, 37147));
+                strikeInstrumentTokenDict.Add(37400, new Tuple<int, int>(37148, 37149));
+                strikeInstrumentTokenDict.Add(37500, new Tuple<int, int>(37150, 37152));
+                strikeInstrumentTokenDict.Add(37600, new Tuple<int, int>(37153, 37156));
+                strikeInstrumentTokenDict.Add(37700, new Tuple<int, int>(37157, 37158));
+                strikeInstrumentTokenDict.Add(37800, new Tuple<int, int>(37292, 37293));
+                strikeInstrumentTokenDict.Add(37900, new Tuple<int, int>(37294, 37295));
+                strikeInstrumentTokenDict.Add(38000, new Tuple<int, int>(37296, 37297));
+                strikeInstrumentTokenDict.Add(38100, new Tuple<int, int>(37300, 37301));
+                strikeInstrumentTokenDict.Add(38200, new Tuple<int, int>(37303, 37304));
+                strikeInstrumentTokenDict.Add(38300, new Tuple<int, int>(37305, 37306));
+                strikeInstrumentTokenDict.Add(38400, new Tuple<int, int>(37307, 37308));
+                strikeInstrumentTokenDict.Add(38500, new Tuple<int, int>(37309, 37310));
+                strikeInstrumentTokenDict.Add(38600, new Tuple<int, int>(37311, 37312));
+                strikeInstrumentTokenDict.Add(38700, new Tuple<int, int>(37313, 37314));
+                strikeInstrumentTokenDict.Add(38800, new Tuple<int, int>(37315, 37316));
+                strikeInstrumentTokenDict.Add(38900, new Tuple<int, int>(37317, 37318));
+                strikeInstrumentTokenDict.Add(39000, new Tuple<int, int>(37319, 37321));
+                //strikeInstrumentTokenDict.Add(39100, new Tuple<int, int>(37322, 37323));
+                //strikeInstrumentTokenDict.Add(39200, new Tuple<int, int>(37324, 37325));
+                //strikeInstrumentTokenDict.Add(39300, new Tuple<int, int>(37326, 37327));
+                //strikeInstrumentTokenDict.Add(39400, new Tuple<int, int>(37328, 37329));
+                //strikeInstrumentTokenDict.Add(39500, new Tuple<int, int>(37330, 37333));
+                //strikeInstrumentTokenDict.Add(39600, new Tuple<int, int>(37334, 37335));
+                //strikeInstrumentTokenDict.Add(39700, new Tuple<int, int>(37336, 37337));
+                //strikeInstrumentTokenDict.Add(39800, new Tuple<int, int>(37338, 37339));
+                //strikeInstrumentTokenDict.Add(39900, new Tuple<int, int>(37340, 37341));
+                //strikeInstrumentTokenDict.Add(40000, new Tuple<int, int>(37342, 37345));
+                //strikeInstrumentTokenDict.Add(40100, new Tuple<int, int>(37346, 37352));
+                //strikeInstrumentTokenDict.Add(40200, new Tuple<int, int>(37353, 37354));
+                //strikeInstrumentTokenDict.Add(40300, new Tuple<int, int>(37356, 37357));
+                //strikeInstrumentTokenDict.Add(40400, new Tuple<int, int>(37358, 37362));
+                //strikeInstrumentTokenDict.Add(40500, new Tuple<int, int>(37364, 37365));
+                //strikeInstrumentTokenDict.Add(40600, new Tuple<int, int>(37370, 37372));
+                //strikeInstrumentTokenDict.Add(40700, new Tuple<int, int>(37373, 37378));
+                //strikeInstrumentTokenDict.Add(40800, new Tuple<int, int>(37379, 37386));
+                //strikeInstrumentTokenDict.Add(40900, new Tuple<int, int>(37387, 37388));
+                //strikeInstrumentTokenDict.Add(41000, new Tuple<int, int>(37389, 37390));
+                //strikeInstrumentTokenDict.Add(41100, new Tuple<int, int>(37393, 37394));
+                //strikeInstrumentTokenDict.Add(41200, new Tuple<int, int>(37395, 37396));
+                //strikeInstrumentTokenDict.Add(41300, new Tuple<int, int>(37397, 37398));
+                //strikeInstrumentTokenDict.Add(41400, new Tuple<int, int>(37399, 37400));
+                //strikeInstrumentTokenDict.Add(41500, new Tuple<int, int>(37401, 37402));
+                //strikeInstrumentTokenDict.Add(41600, new Tuple<int, int>(37403, 37404));
+                //strikeInstrumentTokenDict.Add(41700, new Tuple<int, int>(37405, 37406));
+                //strikeInstrumentTokenDict.Add(41800, new Tuple<int, int>(37407, 37408));
+                //strikeInstrumentTokenDict.Add(41900, new Tuple<int, int>(37409, 37410));
+                //strikeInstrumentTokenDict.Add(42000, new Tuple<int, int>(37411, 37430));
+                //strikeInstrumentTokenDict.Add(42100, new Tuple<int, int>(37431, 37434));
+                //strikeInstrumentTokenDict.Add(42200, new Tuple<int, int>(37435, 37436));
+                //strikeInstrumentTokenDict.Add(42300, new Tuple<int, int>(37437, 37440));
+                //strikeInstrumentTokenDict.Add(42400, new Tuple<int, int>(37445, 37446));
+                //strikeInstrumentTokenDict.Add(42500, new Tuple<int, int>(37447, 37448));
+                //strikeInstrumentTokenDict.Add(42600, new Tuple<int, int>(37449, 37450));
+                //strikeInstrumentTokenDict.Add(42700, new Tuple<int, int>(37453, 37454));
+                //strikeInstrumentTokenDict.Add(42800, new Tuple<int, int>(37455, 37456));
+                //strikeInstrumentTokenDict.Add(42900, new Tuple<int, int>(37457, 37458));
+                //strikeInstrumentTokenDict.Add(43000, new Tuple<int, int>(37459, 37460));
+                //strikeInstrumentTokenDict.Add(43100, new Tuple<int, int>(37462, 37463));
+                //strikeInstrumentTokenDict.Add(43200, new Tuple<int, int>(37464, 37465));
+                //strikeInstrumentTokenDict.Add(43300, new Tuple<int, int>(37466, 37467));
+                //strikeInstrumentTokenDict.Add(43400, new Tuple<int, int>(35113, 35118));
+                //strikeInstrumentTokenDict.Add(43500, new Tuple<int, int>(37468, 37483));
+                //strikeInstrumentTokenDict.Add(44000, new Tuple<int, int>(37484, 37485));
+                //strikeInstrumentTokenDict.Add(44500, new Tuple<int, int>(37486, 37487));
+                //strikeInstrumentTokenDict.Add(45000, new Tuple<int, int>(37488, 37489));
+                //strikeInstrumentTokenDict.Add(45500, new Tuple<int, int>(37490, 37496));
+                //strikeInstrumentTokenDict.Add(46000, new Tuple<int, int>(37497, 37500));
+                //strikeInstrumentTokenDict.Add(46500, new Tuple<int, int>(37501, 37506));
 
                 foreach (var keyVal in strikeInstrumentTokenDict)
                 {
@@ -266,6 +264,12 @@ namespace OptionEdge.API.AliceBlue.Samples
                 Console.WriteLine("Ticker connected and subscribed...");
                 while (true)
                 {
+                    if (!startingFreeze && (DateTime.Now.TimeOfDay - lastTickerFeed).TotalSeconds > 30)
+                    {
+                        _ticker.Reconnect();
+                        startingFreeze = true;
+                        startingFreezeCounter = 5;
+                    }
                     //if ((DateTime.Now.TimeOfDay - lastUpdated).TotalSeconds > 30)
                     //{
                     //    wsClient.Start().Wait();
@@ -295,10 +299,10 @@ namespace OptionEdge.API.AliceBlue.Samples
                         var pePrice = peDetails == null ? 0 : peDetails.SellPrice;
                         WriteMsgToConsole($"{DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss")} " +
                             $"PnL: {(multiStraddleTrailPnl + pePnL + cePnL) / 100m,-10} " +
-                            $"Net: {(multiStraddleTrailPnl + pePnL + cePnL) * aliceBlueNumberOfLots1 / 100m,-10} " +
-                            $"MaxPnL: {maxPnL / 100m,-10} " +
-                            $"Straddle: {(cePrice + pePrice) / 100m,-10} " +
-                            $"Update: {(lastUpdated - lastTickerFeed).TotalSeconds}");
+                            //$"Net: {(multiStraddleTrailPnl + pePnL + cePnL) * aliceBlueNumberOfLots1 / 100m,-10} " +
+                            //$"MaxPnL: {maxPnL / 100m,-10} " +
+                            //$"Straddle: {(cePrice + pePrice) / 100m,-10} " +
+                            $"Update: {((DateTime.Now.TimeOfDay - lastTickerFeed).TotalSeconds>2?">>>>":"")}{(DateTime.Now.TimeOfDay - lastTickerFeed).TotalSeconds:F2}");
                     }
                     if (currentStrikeData?.ExchangeTimeStamp != null && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                     {
@@ -334,9 +338,9 @@ namespace OptionEdge.API.AliceBlue.Samples
                                 }
                             }
 
-                            msg.Append($"CE: {currentSubscriptions.Subscriptions[callToken].StrikePrice} - {currentSubscriptions.Subscriptions[callToken].SellPrice / 100m,-10}");
-                            msg.Append($"PE: {currentSubscriptions.Subscriptions[putToken].StrikePrice} - {currentSubscriptions.Subscriptions[putToken].SellPrice / 100m,-10} " +
-                            $"Update: {(lastUpdated - lastTickerFeed).TotalSeconds}");
+                            //msg.Append($"CE: {currentSubscriptions.Subscriptions[callToken].StrikePrice} - {currentSubscriptions.Subscriptions[callToken].SellPrice / 100m,-10}");
+                            //msg.Append($"PE: {currentSubscriptions.Subscriptions[putToken].StrikePrice} - {currentSubscriptions.Subscriptions[putToken].SellPrice / 100m,-10} " +
+                            msg.Append($"Update: {((DateTime.Now.TimeOfDay - lastTickerFeed).TotalSeconds > 2 ? ">>>>" : "")}{(DateTime.Now.TimeOfDay - lastTickerFeed).TotalSeconds:F2}");
 
                             //if (string.IsNullOrEmpty(putSellOrderOpenId))
                             //{
@@ -423,6 +427,12 @@ namespace OptionEdge.API.AliceBlue.Samples
                         WriteMsgToConsole("---> Enter no. of lots to ADD");
                         addLots = DateTime.Now.TimeOfDay;
                     }
+                    if (k == ConsoleKey.W)
+                    {
+                        _ticker.Reconnect();
+                        startingFreezeCounter = 5;
+                        startingFreeze = true;
+                    }
                     if (Char.IsDigit((char)k))
                     {
                         var value = int.Parse(((char)k).ToString());
@@ -469,16 +479,16 @@ namespace OptionEdge.API.AliceBlue.Samples
                 var ltp = Convert.ToInt32(TickData.LastTradedPrice * 100);
                 if (DateTime.Now.TimeOfDay <= OrderPlacementTime && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                 {
-                    lock (currentStrikeData)
-                    {
-                        lock (currentSubscriptions)
-                        {
+                    //lock (currentStrikeData)
+                    //{
+                    //    lock (currentSubscriptions)
+                    //    {
                             if (DateTime.Now.TimeOfDay <= OrderPlacementTime && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                             {
                                 indiaVix = ltp;
                             }
-                        }
-                    }
+                    //    }
+                    //}
                 }
             }
             else if (TickData.Token == niftyBankInstrumentToken)
@@ -496,8 +506,8 @@ namespace OptionEdge.API.AliceBlue.Samples
                 //        WriteMsgToConsole("Failed to enqueue NiftyBank ticker: " + ex.Message);
                 //    }
                 //}
-                lock (currentStrikeData)
-                {
+                //lock (currentStrikeData)
+                //{
                     if (isNiftyBankTickerClosed) return;
                     if (currentStrikeData.StrikePrice == 0)
                     {
@@ -519,22 +529,22 @@ namespace OptionEdge.API.AliceBlue.Samples
                             currentStrikeData.Ltp = ltp;
                         }
                     }
-                }
+                //}
             }
             else if (TickData.Token != null)
             {
                 var instrumentToken = (int)TickData.Token;
                 BankNiftyOption optionData = null;
-                lock (currentSubscriptions)
-                {
+                //lock (currentSubscriptions)
+                //{
                     if (currentSubscriptions.Subscriptions.ContainsKey(instrumentToken))
                     {
                         optionData = currentSubscriptions.Subscriptions[instrumentToken];
                     }
-                }
+                //}
                 if (optionData == null) return;
 
-                lock (optionData)
+                //lock (optionData)
                 {
                     //var ltp = Helper.BinaryToInt32(msg.Binary, 6);
                     {
@@ -575,7 +585,7 @@ namespace OptionEdge.API.AliceBlue.Samples
                 {
                     if (instrumentToken == putInstrumentToken && !string.IsNullOrEmpty(putSellOrderOpenId) && !peBuyClosed)
                     {
-                        lock (currentSubscriptions)
+                        //lock (currentSubscriptions)
                         {
                             if (allPositionsClosed) return;
                             if (!peSellTriggered && optionData.SellPrice <= peSellPrice)
@@ -639,7 +649,7 @@ namespace OptionEdge.API.AliceBlue.Samples
                     }
                     if (instrumentToken == callInstrumentToken && !string.IsNullOrEmpty(callSellOrderOpenId) && !ceBuyClosed)
                     {
-                        lock (currentSubscriptions)
+                        //lock (currentSubscriptions)
                         {
                             if (allPositionsClosed) return;
                             if (!ceSellTriggered && optionData.SellPrice <= ceSellPrice)
@@ -703,7 +713,7 @@ namespace OptionEdge.API.AliceBlue.Samples
 
                     if (!startingFreeze && DateTime.Now.TimeOfDay > OrderPlacementTime && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                     {
-                        lock (currentSubscriptions)
+                        //lock (currentSubscriptions)
                         {
                             var callDiff = 10000000;
                             var putDiff = 10000000;
@@ -768,7 +778,7 @@ namespace OptionEdge.API.AliceBlue.Samples
                     if ((instrumentToken == putInstrumentToken && !string.IsNullOrEmpty(putSellOrderOpenId))
                             || (instrumentToken == callInstrumentToken && !string.IsNullOrEmpty(callSellOrderOpenId)))
                     {
-                        lock (currentSubscriptions)
+                        //lock (currentSubscriptions)
                         {
                             if (DateTime.Now.TimeOfDay > MarketCloseTime && !allPositionsClosed)
                             {
@@ -779,7 +789,7 @@ namespace OptionEdge.API.AliceBlue.Samples
                             var bankNiftyEntryLtpCache = bankNiftyEntryLtp;
                             if ((currentStrikeData.Ltp > bankNiftyEntryLtpCache * 1.01m && ceSellTriggered) || (currentStrikeData.Ltp < bankNiftyEntryLtpCache * 0.99m && peSellTriggered))
                             {
-                                lock (currentStrikeData)
+                                //lock (currentStrikeData)
                                 {
                                     if (((currentStrikeData.Ltp > bankNiftyEntryLtpCache * 1.01m && ceSellTriggered) || (currentStrikeData.Ltp < bankNiftyEntryLtpCache * 0.99m && peSellTriggered))
                                             && bankNiftyEntryLtp == bankNiftyEntryLtpCache && !allPositionsClosed)
@@ -837,9 +847,9 @@ namespace OptionEdge.API.AliceBlue.Samples
                     }
                     if (!startingFreeze && DateTime.Now.TimeOfDay > OrderPlacementTime && string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId))
                     {
-                        lock (currentStrikeData)
+                        //lock (currentStrikeData)
                         {
-                            lock (currentSubscriptions)
+                            //lock (currentSubscriptions)
                             {
                                 if (string.IsNullOrEmpty(putSellOrderOpenId) && string.IsNullOrEmpty(callSellOrderOpenId) && MultiStraddle && indiaVix < indiaVixThreshold)
                                 {
@@ -907,6 +917,9 @@ namespace OptionEdge.API.AliceBlue.Samples
         private static void _ticker_OnError(string Message)
         {
             Console.WriteLine("Ticker error." + Message);
+            _ticker.Reconnect();
+            startingFreeze = true;
+            startingFreezeCounter = 5;
         }
 
         private static void _ticker_OnClose()

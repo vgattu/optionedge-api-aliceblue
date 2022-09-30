@@ -107,12 +107,12 @@ namespace OptionEdge.API.AliceBlue
                     //}
                     if ((data["t"] == "tf" || data["t"] == "df") && Utils.IsPropertyExist(data, "ft") && Utils.IsPropertyExist(data, "lp"))
                     {
-                        ThreadPool.QueueUserWorkItem(
-                        new WaitCallback(delegate (object state)
-                        {
-                            OnTick((Tick)state);
-                        }), new Tick(data));
-                        //OnTick(new Tick(data));
+                        //ThreadPool.QueueUserWorkItem(
+                        //new WaitCallback(delegate (object state)
+                        //{
+                        //    OnTick((Tick)state);
+                        //}), new Tick(data));
+                        OnTick(new Tick(data));
                     }
                 } else
                 {
@@ -176,7 +176,7 @@ namespace OptionEdge.API.AliceBlue
             _ws.Close();
         }
 
-        private void Reconnect()
+        public void Reconnect()
         {
             if (IsConnected)
             {
@@ -193,6 +193,7 @@ namespace OptionEdge.API.AliceBlue
             }
             else
             {
+                Console.WriteLine("Trying to reconnect ticker.");
                 OnReconnect?.Invoke();
                 _retryCount += 1;
                 _ws.Close(true);
