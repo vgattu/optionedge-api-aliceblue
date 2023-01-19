@@ -11,8 +11,7 @@ namespace OptionEdge.API.AliceBlue.Samples
             // demo.Run();
 
             DevTest demo = new DevTest();
-            demo.Run();
+            demo.Run().Wait();
         }
-
     }
 }
